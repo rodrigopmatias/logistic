@@ -7,9 +7,10 @@ import (
 
 	"github.com/rodrigopmatias/ligistic/controllers/authController"
 	"github.com/rodrigopmatias/ligistic/framework/router"
+	"github.com/rodrigopmatias/ligistic/framework/router/context"
 )
 
-func AuthenticateHandle(ctx *router.Context) router.Result {
+func AuthenticateHandle(ctx *context.Context) router.Result {
 	var statusCode = http.StatusNotImplemented
 	var content = []byte("{\"ok\": false, \"message\": \"not implemented\"}")
 	var payload = authController.AuthenticatePayload{}

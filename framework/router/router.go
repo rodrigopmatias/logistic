@@ -6,6 +6,9 @@ import (
 	"net/http"
 	"regexp"
 	"time"
+
+	"github.com/rodrigopmatias/ligistic/framework/router/context"
+	"github.com/rodrigopmatias/ligistic/framework/router/middleware"
 )
 
 type ContentResult struct {
@@ -25,12 +28,12 @@ type Result struct {
 type Route struct {
 	Method  string
 	Pattern *regexp.Regexp
-	Handle  func(ctx *Context) Result
+	Handle  func(ctx *context.Context) Result
 }
 
 var routes []Route
 
-func Register(method string, pattern string, handle func(ctx *Context) Result) error {
+func Register(method string, pattern string, handle func(ctx *context.Context) Result) error {
 	compiled, err := regexp.Compile(pattern)
 
 	if err == nil {
@@ -50,14 +53,15 @@ func RouterHandler(rw http.ResponseWriter, req *http.Request) {
 	statusCode := 404
 	content := []byte("{\"ok\": false, \"message\": \"Resource not found\"}")
 
-	ctx := Context{
-		Request: req,
-	}
+	ctx := context.New(req)
 
 	start := time.Now()
 	for _, route := range routes {
 		if route.Pattern.MatchString(req.URL.Path) {
-			result := route.Handle(&ctx)
+			middleware.DoBefore(ctx)
+			result := route.Handle(ctx)
+			middleware.DoAfter(ctx)
+
 			statusCode = result.StatusCode
 			content = result.Content
 			break

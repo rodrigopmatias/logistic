@@ -7,9 +7,10 @@ import (
 
 	"github.com/rodrigopmatias/ligistic/controllers/authController"
 	"github.com/rodrigopmatias/ligistic/framework/router"
+	"github.com/rodrigopmatias/ligistic/framework/router/context"
 )
 
-func RegisterHandle(ctx *router.Context) router.Result {
+func RegisterHandle(ctx *context.Context) router.Result {
 	var statusCode = http.StatusNotImplemented
 	var content []byte
 	var payload = authController.RegisterPayload{}

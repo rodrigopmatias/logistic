@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 
 	"github.com/rodrigopmatias/ligistic/framework/router"
+	"github.com/rodrigopmatias/ligistic/framework/router/context"
 )
 
 type PingResult struct {
@@ -11,7 +12,7 @@ type PingResult struct {
 	Message string `json:"message"`
 }
 
-func PingHandler(ctx *router.Context) router.Result {
+func PingHandler(ctx *context.Context) router.Result {
 	result := PingResult{
 		Ok:      true,
 		Message: "Pong!",
