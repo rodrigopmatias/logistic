@@ -2,11 +2,14 @@ package routes
 
 import (
 	"github.com/rodrigopmatias/ligistic/framework/router"
+	"github.com/rodrigopmatias/ligistic/framework/router/middleware"
 	"github.com/rodrigopmatias/ligistic/routes/authHandlers"
 	"github.com/rodrigopmatias/ligistic/routes/coreHandlers"
 )
 
 func Setup() {
+	middleware.OnBefore(middleware.JwtAuthorizationMiddleware)
+
 	router.Register("GET", "/health", coreHandlers.HealthHandler)
 	router.Register("GET", "/ping", coreHandlers.PingHandler)
 	router.Register("POST", "/api/auth/register", authHandlers.RegisterHandle)

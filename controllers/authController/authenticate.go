@@ -42,8 +42,7 @@ func Authenticate(payload *AuthenticatePayload) (*AuthenticateResult, error) {
 		claims := UserClaims{
 			UserID: user.ID,
 			StandardClaims: jwt.StandardClaims{
-				ExpiresAt: jwt.NewTime(12000),
-				Issuer:    "MyOrg",
+				Issuer: "MyOrg",
 			},
 		}
 
