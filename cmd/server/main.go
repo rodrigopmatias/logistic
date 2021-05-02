@@ -24,7 +24,7 @@ func (version Version) String() string {
 var version = Version{
 	Major: 0,
 	Minor: 0,
-	Build: 5,
+	Build: 99,
 }
 
 func main() {
