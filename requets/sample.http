@@ -1,0 +1,40 @@
+
+###
+# @name health
+GET http://localhost:4000/health
+
+
+###
+# @name ping
+GET http://localhost:4000/ping
+
+
+###
+# @name authRegister
+POST http://localhost:4000/api/auth/register
+Content-Type: "application/json"
+
+{
+    "email": "dev.rodrigopmatias@gmail.com",
+    "firstName": "Rodrigo",
+    "lastName": "Matias",
+    "password": "secr3t",
+    "confirmPassword": "secr3t"
+}
+
+
+###
+# @name authAuthenticate
+POST http://localhost:4000/api/auth/authenticate
+Content-Type: "application/json"
+
+{
+    "email": "rodrigopmatias@gmail.com",
+    "password": "secr3t"
+}
+
+
+###
+# @name authMe
+GET http://localhost:4000/api/auth/me
+Authorization: Baear MySpecialToken
