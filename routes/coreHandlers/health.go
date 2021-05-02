@@ -2,9 +2,9 @@ package coreHandlers
 
 import (
 	"encoding/json"
-	"net/http"
 
 	"github.com/rodrigopmatias/ligistic/framework/router"
+	"github.com/rodrigopmatias/ligistic/framework/router/context"
 )
 
 type HealthResult struct {
@@ -12,7 +12,7 @@ type HealthResult struct {
 	Message string `json:"message"`
 }
 
-func HealthHandler(req *http.Request) router.Result {
+func HealthHandler(ctx *context.Context) router.Result {
 	result := HealthResult{
 		Ok:      true,
 		Message: "Service is alive!",
