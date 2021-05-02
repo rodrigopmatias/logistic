@@ -9,12 +9,12 @@ import (
 	"github.com/rodrigopmatias/ligistic/framework/router"
 )
 
-func RegisterHandle(req *http.Request) router.Result {
+func RegisterHandle(ctx *router.Context) router.Result {
 	var statusCode = http.StatusNotImplemented
 	var content []byte
 	var payload = authController.RegisterPayload{}
 
-	body, err := ioutil.ReadAll(req.Body)
+	body, err := ioutil.ReadAll(ctx.Request.Body)
 
 	if err != nil {
 		statusCode = http.StatusBadRequest

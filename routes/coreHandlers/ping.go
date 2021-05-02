@@ -2,7 +2,6 @@ package coreHandlers
 
 import (
 	"encoding/json"
-	"net/http"
 
 	"github.com/rodrigopmatias/ligistic/framework/router"
 )
@@ -12,7 +11,7 @@ type PingResult struct {
 	Message string `json:"message"`
 }
 
-func PingHandler(req *http.Request) router.Result {
+func PingHandler(ctx *router.Context) router.Result {
 	result := PingResult{
 		Ok:      true,
 		Message: "Pong!",

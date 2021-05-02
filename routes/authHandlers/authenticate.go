@@ -9,12 +9,12 @@ import (
 	"github.com/rodrigopmatias/ligistic/framework/router"
 )
 
-func AuthenticateHandle(req *http.Request) router.Result {
+func AuthenticateHandle(ctx *router.Context) router.Result {
 	var statusCode = http.StatusNotImplemented
 	var content = []byte("{\"ok\": false, \"message\": \"not implemented\"}")
 	var payload = authController.AuthenticatePayload{}
 
-	body, err := ioutil.ReadAll(req.Body)
+	body, err := ioutil.ReadAll(ctx.Request.Body)
 
 	if err != nil {
 		statusCode = 400

@@ -25,12 +25,12 @@ type Result struct {
 type Route struct {
 	Method  string
 	Pattern *regexp.Regexp
-	Handle  func(req *http.Request) Result
+	Handle  func(ctx *Context) Result
 }
 
 var routes []Route
 
-func Register(method string, pattern string, handle func(req *http.Request) Result) error {
+func Register(method string, pattern string, handle func(ctx *Context) Result) error {
 	compiled, err := regexp.Compile(pattern)
 
 	if err == nil {
@@ -50,11 +50,14 @@ func RouterHandler(rw http.ResponseWriter, req *http.Request) {
 	statusCode := 404
 	content := []byte("{\"ok\": false, \"message\": \"Resource not found\"}")
 
+	ctx := Context{
+		Request: req,
+	}
+
 	start := time.Now()
 	for _, route := range routes {
 		if route.Pattern.MatchString(req.URL.Path) {
-			result := route.Handle(req)
-
+			result := route.Handle(&ctx)
 			statusCode = result.StatusCode
 			content = result.Content
 			break

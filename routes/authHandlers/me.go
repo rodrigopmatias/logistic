@@ -6,7 +6,7 @@ import (
 	"github.com/rodrigopmatias/ligistic/framework/router"
 )
 
-func MeHandler(req *http.Request) router.Result {
+func MeHandler(ctx *router.Context) router.Result {
 	return router.Result{
 		StatusCode: http.StatusNotImplemented,
 		Content:    []byte("{\"ok\": false, \"message\": \"not implemented\"}"),
