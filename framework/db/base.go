@@ -40,7 +40,11 @@ func Open(config OpenConfig) (*gorm.DB, error) {
 
 	if config.Migrate {
 		log.Println("Running migrations of models")
-		conn.AutoMigrate(&models.User{})
+		conn.AutoMigrate(
+			&models.User{},
+			&models.Wallet{},
+			&models.Category{},
+		)
 	}
 
 	return conn, nil
