@@ -40,9 +40,7 @@ func server(ctx context.Context) (err error) {
 		Handler: mux,
 	}
 
-	db.Open(db.OpenConfig{
-		Migrate: true,
-	})
+	db.Open(db.OpenConfig{})
 
 	mux.HandleFunc("/", router.RouterHandler)
 	routes.Setup()

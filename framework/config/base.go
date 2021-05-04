@@ -39,7 +39,7 @@ func New() *Config {
 			Addr:      "127.0.0.1",
 			Port:      4000,
 			DbDialect: "sqlite",
-			DbDSN:     "db.sqlite",
+			DbDSN:     "db.sqlite3",
 		}
 
 		configFile := os.Getenv("APP_CONFIG")
