@@ -1,8 +1,6 @@
 package middleware
 
 import (
-	"log"
-
 	"github.com/rodrigopmatias/ligistic/framework/router/context"
 )
 
@@ -24,14 +22,12 @@ func OnAfter(handle middlewareHandle) {
 }
 
 func DoBefore(ctx *context.Context) {
-	log.Println("Do Before Handle")
 	for _, handle := range stack.beforer {
 		handle(ctx)
 	}
 }
 
 func DoAfter(ctx *context.Context) {
-	log.Println("Do After Handle")
 	for _, handle := range stack.beforer {
 		handle(ctx)
 	}
