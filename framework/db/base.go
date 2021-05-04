@@ -4,6 +4,7 @@ import (
 	"log"
 	"os"
 
+	"github.com/rodrigopmatias/ligistic/framework/config"
 	"github.com/rodrigopmatias/ligistic/models"
 	"gorm.io/driver/mysql"
 	"gorm.io/driver/postgres"
@@ -54,16 +55,15 @@ func database() (*gorm.DB, error) {
 	var db *gorm.DB
 	var err error
 
-	switch dialect := getEnv("DB_DIALECT", "sqlite"); dialect {
+	cnf := config.New()
+
+	switch cnf.DbDialect {
 	case "postgres":
-		dbDSN := getEnv("DB_DSN", "host=127.0.0.1 port=5432 sslmode=disable user=postgres password=secret dbname=db")
-		db, err = gorm.Open(postgres.Open(dbDSN), &gorm.Config{})
+		db, err = gorm.Open(postgres.Open(cnf.DbDSN), &gorm.Config{})
 	case "mysql":
-		dbDSN := getEnv("DB_DSN", "user:passwd@tcp(127.0.0.1:3306)/db?charset=utf8")
-		db, err = gorm.Open(mysql.Open(dbDSN), &gorm.Config{})
+		db, err = gorm.Open(mysql.Open(cnf.DbDSN), &gorm.Config{})
 	case "sqlite":
-		dbDSN := getEnv("DB_DSN", "db.sqlite3")
-		db, err = gorm.Open(sqlite.Open(dbDSN), &gorm.Config{})
+		db, err = gorm.Open(sqlite.Open(cnf.DbDSN), &gorm.Config{})
 	}
 
 	return db, err
