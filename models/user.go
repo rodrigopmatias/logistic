@@ -12,7 +12,7 @@ type User struct {
 	LastName  string `json:"lastName" gorm:"varchar(100);not null"`
 	Password  string `json:"-"`
 	IsActive  bool   `json:"isActive"`
-	IsAdmin   bool   `jsson:"isAdmin"`
+	IsAdmin   bool   `json:"isAdmin"`
 }
 
 func (user *User) BeforeCreate(tx *gorm.DB) error {
